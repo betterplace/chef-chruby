@@ -18,7 +18,17 @@ node['chruby']['rubies'].each do |ruby, flag|
   if flag
     ruby_build_ruby ruby do
       prefix_path "/opt/rubies/#{ruby}"
-    end   
+    end
+    if gems = node['chruby']['gems'] and gems = gems[ruby]
+      for gem in  gems
+        name, version = gem.values_at('name', 'version')
+        script "Installing gem #{name} #{version}" do
+          not_if "/opt/rubies/#{ruby}/bin/gem list | grep -q \"^#{name} \""
+          interpreter "bash"
+          code "/opt/rubies/#{ruby}/bin/gem install #{name.inspect} -v #{version.inspect}"
+        end
+      end
+    end
   end
 end
 
