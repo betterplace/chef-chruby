@@ -29,6 +29,11 @@ node['chruby']['rubies'].each do |ruby, flag|
         end
       end
     end
+  elsif flag == false
+    directory "/opt/rubies/#{ruby}" do
+      recursive true
+      action :delete
+    end
   end
 end
 
