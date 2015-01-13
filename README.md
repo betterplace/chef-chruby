@@ -38,7 +38,15 @@ default_attributes(
       "1.9.3-p392" => false,
       "1.9.3-p429" => true
     },
-    "default" => "1.9.3-p429"
+    "default" => "1.9.3-p429",
+    "gems" => {
+      "1.9.3-p392" => [
+        { "name" => "bundler", "version" => "1.7.11" }
+      ],
+      "1.9.3-p429" => [
+        { "name" => "bundler", "version" => "1.7.11" }
+      ]
+    }
   }
 )
 ```
